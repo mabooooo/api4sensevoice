@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebSocket Audio Transcription</title>
     <style>
         #transcriptionResult {
@@ -65,7 +66,9 @@
         }
         var queryString = queryParams.length > 0 ? `?${queryParams.join('&')}` : '';
 
-        ws = new WebSocket(`wss://your_wss_server_address/ws/transcribe${queryString}`);
+        // ws = new WebSocket(`wss://your_wss_server_address/ws/transcribe${queryString}`);
+        ws = new WebSocket(`ws://127.0.0.1:8888/ws/transcribe${queryString}`);
+
         ws.binaryType = 'arraybuffer';
 
         ws.onopen = function(event) {
@@ -79,9 +82,9 @@
                     // Read the Blob content for debugging
                     var reader = new FileReader();
                     reader.onloadend = function() {
-                        console.log('Blob content: ', new Uint8Array(reader.result));
+                        // console.log('Blob content: ', new Uint8Array(reader.result));
                         ws.send(audioBlob);
-                        console.log('Sending audio data');
+                        // console.log('Sending audio data');
                         record.clear();
                     };
                     reader.readAsArrayBuffer(audioBlob);

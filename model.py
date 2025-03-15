@@ -1,8 +1,10 @@
+import os
+os.add_dll_directory(r"C:\torch_lib")
 from typing import Iterable, Optional
+import torch
 import types
 import time
 import numpy as np
-import torch
 import torch.nn.functional as F
 from torch import Tensor
 from torch import nn
